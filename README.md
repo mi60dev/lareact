@@ -2,6 +2,9 @@
 
 Laravel + React startup project. 
 
+**This project is intended to be used for large & scalable platforms, built with Laravel and React JS / React Native.
+**
+
 This project will help you start developing your app right away. It contains the most basic front-end and back-end features to start developing platform based on Laravel and React JS. (back-end in development)
 
 
@@ -55,3 +58,6 @@ npm start
 - Create backend migrations / models
 - Create React Native alternative version
 
+
+## Conclusion
+This project is just starting. Feel free to contribute to this project
