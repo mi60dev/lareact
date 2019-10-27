@@ -5,7 +5,7 @@ Laravel + React startup project
 Auth included (Passport / React Login pages)
 
 
-
+```
 sudo chown -R $USER:www-data storage
 
 sudo chown -R $USER:www-data bootstrap/cache
@@ -25,4 +25,4 @@ php artisan key:generate
 npm install
 
 npm start
-
+```
