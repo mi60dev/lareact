@@ -2,6 +2,11 @@
 
 Laravel + React startup project
 
+## Features
+- Login / Register
+- Dashboard
+
+
 Auth included (Passport / React Login pages)
 
 
