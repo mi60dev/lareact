@@ -4,7 +4,7 @@ Laravel + React startup project
 
 Auth included (Passport / React Login pages)
 
-npm install
+
 
 composer install
 
