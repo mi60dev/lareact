@@ -7,9 +7,7 @@ Laravel + React startup project
 - Dashboard
 
 
-Auth included (Passport / React Login pages)
-
-
+## Installation
 ```
 sudo chown -R $USER:www-data storage
 sudo chown -R $USER:www-data bootstrap/cache
