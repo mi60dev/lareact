@@ -10,7 +10,8 @@ Laravel + React startup project
 ## Installation
 
 Clone the repo to `my-project` (or whatever). Run the following set of commands
-```cd my-project
+```
+cd my-project
 ```
 ```
 sudo chown -R $USER:www-data storage
