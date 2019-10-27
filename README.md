@@ -9,7 +9,9 @@ Laravel + React startup project
 
 ## Installation
 
-Clone the repo and run the following set of commands
+Clone the repo to `my-project` (or whatever). Run the following set of commands
+```cd my-project
+```
 ```
 sudo chown -R $USER:www-data storage
 sudo chown -R $USER:www-data bootstrap/cache
@@ -18,6 +20,9 @@ chmod -R 775 bootstrap/cache
 composer install
 cp .env.example .env
 vim .env
+```
+Add your database configs. Then run
+```
 php artisan key:generate
 php artisan passport:install
 npm install
