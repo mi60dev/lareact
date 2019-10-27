@@ -17,6 +17,7 @@ chmod -R 775 storage
 chmod -R 775 bootstrap/cache
 composer install
 cp .env.example .env
+vim .env
 php artisan key:generate
 php artisan passport:install
 npm install
