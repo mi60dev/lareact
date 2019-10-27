@@ -18,7 +18,7 @@ const Auth = {
 };
 // 3.3
 const PrivateRoute = ({ component: Component, path, ...rest }) => (
-<Route path={path}
+    <Route path={path}
        {...rest}
        render={props => Auth.isLoggedIn ? (
        <Component {...props} />) : (<Redirect to={{
