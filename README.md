@@ -6,13 +6,20 @@ Laravel + React startup project
 
 ## Features
 
-#### Backend
+### Backend
 - Login / Register
 - Dashboard
 - Translations
-#### Frontend
+### Frontend
 - Sass
 - Transitions
+
+
+
+
+
+
+
 
 
 ## Installation
