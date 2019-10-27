@@ -48,7 +48,7 @@ npm start
 ```
 
 
-##To Do
+## To Do
 
 - Finish React Authentication process
 
