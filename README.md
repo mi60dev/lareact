@@ -8,6 +8,8 @@ Laravel + React startup project
 
 
 ## Installation
+
+Clone the repo and run the following set of commands
 ```
 sudo chown -R $USER:www-data storage
 sudo chown -R $USER:www-data bootstrap/cache
@@ -20,6 +22,3 @@ php artisan passport:install
 npm install
 npm start
 ```
-Under question 
-
-php artisan vendor:publish
