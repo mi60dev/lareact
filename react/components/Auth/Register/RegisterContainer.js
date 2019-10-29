@@ -31,7 +31,7 @@ class RegisterContainer extends Component {
     let state = localStorage["appState"];
     if (state) {
       let AppState = JSON.parse(state);
-      this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState });
+      this.setState({ isLogged: AppState.isLogged, user: AppState });
     }
     if (this.state.isRegistered) {
       return this.props.history.push("/dashboard");
@@ -42,7 +42,7 @@ class RegisterContainer extends Component {
     const { prevLocation } = this.state.redirect.state || {
       prevLocation: { pathname: "/dashboard" }
     };
-    if (prevLocation && this.state.isLoggedIn) {
+    if (prevLocation && this.state.isLogged) {
       return this.props.history.push(prevLocation);
     }
   }

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Link, NavLink, withRouter} from 'react-router-dom';
 
-class Header extends Component {
+class AuthHeader extends Component {
   
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
         if(localStorage.appState) {
             this.state = JSON.parse(localStorage.appState);
         } else {
@@ -32,26 +32,9 @@ class Header extends Component {
     };
     
     return (
-        <nav className="navbar">
-            <ul>
-                
-                {this.state.isLogged &&
-                <li className="has-sub">
-                    <NavLink to="/dashboard">Dashboard</NavLink>
-                    <Link to="/login" onClick={this.logOut}>Logout</Link>
-                </li>
-                } 
-                
-                {!this.state.isLogged &&
-                <li>
-                    <Link to="/login">Login</Link> |
-                    <Link to="/register">Register</Link>
-                </li>
-                }
-            </ul>
-        </nav>
+        <img className="logo" src="/img/logo-white.png" />
     )
   }
 }
 
-export default withRouter(Header)
+export default withRouter(AuthHeader)

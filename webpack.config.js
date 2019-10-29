@@ -20,19 +20,8 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.(s[ac]ss)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              importer: globImporter()
-            }
-          }
-        ]
-        //test: /\.scss$/,
-        //use: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.sass$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },

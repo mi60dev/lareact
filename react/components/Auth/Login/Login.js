@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import LoginContainer from './LoginContainer';
 import {withRouter} from "react-router-dom";
+
+import AuthHeader from '../Header';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -10,9 +13,12 @@ class Login extends Component {
   }
   render() {
     return (
-      <div className="content">
-        <LoginContainer redirect={this.state.redirect} />
-      </div>
+        <div>
+            <AuthHeader />
+            <div className="content">
+                <LoginContainer redirect={this.state.redirect} />
+            </div>
+        </div>
     )
   } 
 }

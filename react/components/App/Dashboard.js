@@ -9,7 +9,7 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: false,
+      isLogged: false,
       user: {}
     }
   }
@@ -18,7 +18,7 @@ class Home extends Component {
     let state = localStorage["appState"];
     if (state) {
       let AppState = JSON.parse(state);
-      this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState.user });
+      this.setState({ isLogged: AppState.isLogged, user: AppState.user });
     }
     axios.get('/user')
     .then(res => {
@@ -29,7 +29,7 @@ class Home extends Component {
 render() {
     return (
       <div>
-        <Header userData={this.state.user} userIsLoggedIn={this.state.isLoggedIn}/>
+        <Header userData={this.state.user} userIsLoggedIn={this.state.isLogged}/>
             <span>Whatever normally goes into the user dasboard page; the table below for instance</span> <br/>
             <pre></pre>
         <Footer/>

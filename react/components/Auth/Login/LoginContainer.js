@@ -7,7 +7,7 @@ class LoginContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
+      isLogged: false,
       error: '',
       formSubmitting: false,
       user: {
@@ -24,12 +24,12 @@ class LoginContainer extends Component {
     let state = localStorage["appState"];
     if (state) {
       let AppState = JSON.parse(state);
-      this.setState({isLoggedIn: AppState.isLoggedIn, user: AppState});
+      this.setState({isLogged: AppState.isLogged, user: AppState});
     }
   }
   componentDidMount() {
     const { prevLocation } = this.state.redirect.state || { prevLocation: { pathname: '/dashboard' } };
-    if (prevLocation && this.state.isLoggedIn) {
+    if (prevLocation && this.state.isLogged) {
       return this.props.history.push(prevLocation);
     }
   }
@@ -48,7 +48,7 @@ class LoginContainer extends Component {
              email: res.data.user.email,
            };
            let appState = {
-             isLoggedIn: true,
+             isLogged: true,
              user: userData,
              token: res.data.token
            };
@@ -56,7 +56,7 @@ class LoginContainer extends Component {
            axios.defaults.headers.common = {'Authorization': `Bearer ${` +res.data.token+ `}`}
            localStorage["appState"] = JSON.stringify(appState);
            this.setState({
-              isLoggedIn: appState.isLoggedIn,
+              isLogged: appState.isLogged,
               user: appState.user,
               error: ''
            });
@@ -66,8 +66,6 @@ class LoginContainer extends Component {
         }
     })
     .catch(error => {
-        
-        console.log(error);
         if (error.response) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx
             let err = error.response.data;
@@ -119,11 +117,11 @@ render() {
       <div className="row">
         <div className="offset-xl-3 col-xl-6 offset-lg-1 col-lg-10 col-md-12 col-sm-12 col-12 ">
           <h2 className="text-center mb30">Log In To Your Account</h2>
-          {this.state.isLoggedIn ? <FlashMessage duration={60000} persistOnHover={true}>
+          {this.state.isLogged ? <FlashMessage duration={60000} persistOnHover={true}>
           <h5 className={"alert alert-success"}>Login successful, redirecting...</h5></FlashMessage> : ''}
           {this.state.error ? <FlashMessage duration={100000} persistOnHover={true}>
           <h5 className={"alert alert-danger"}>Error: {this.state.error}</h5></FlashMessage> : ''}
-          {error && !this.state.isLoggedIn ? <FlashMessage duration={100000} persistOnHover={true}>
+          {error && !this.state.isLogged ? <FlashMessage duration={100000} persistOnHover={true}>
           <h5 className={"alert alert-danger"}>Error: {error}</h5></FlashMessage> : ''}
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">

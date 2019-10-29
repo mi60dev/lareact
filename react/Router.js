@@ -4,20 +4,56 @@ import {
     BrowserRouter, 
     Link, 
     Route, 
-    Switch
+    Switch,
+    Redirect
 } from 'react-router-dom';
 import axios from "axios";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 
-import Home from './components/Layouts/Home/Home';
 import Login from './components/Auth/Login/Login';
 import Register from './components/Auth/Register/Register';
 import NotFound from './components/NotFound/NotFound'
 import PrivateRoute from './PrivateRoute'
 import Dashboard from './components/App/Dashboard';
 
-import './theme/_styles.sass';
+import './theme/all.sass';
+
+function Main({ location }) {
+
+    let storage = JSON.parse(localStorage.appState);
+    if(!storage || !storage.isLogged){
+        document.querySelector('body').classList.add('visitor');
+    }
+    
+    return (
+    <Wrapper>
+    <TransitionGroup className="transition-group">
+        <CSSTransition
+          key={location.key}
+          timeout={{ enter: 100, exit: 50 }}
+          classNames={'fade'}
+        >
+        <section className="route-section">
+        <Switch className="app"  location={location}>
+            <Redirect exact from="/" to="/dashboard" />
+        
+            {/*User will LogIn*/}
+            <Route exact path='/login' component={Login}/>
+            <Route path='/register' component={Register}/>
+            
+            {/* User is LoggedIn*/}
+            <PrivateRoute path='/dashboard' component={Dashboard}/>
+            
+            {/*Page Not Found*/}
+            <Route component={NotFound}/>
+        </Switch>
+        </section>
+        </CSSTransition>
+      </TransitionGroup>
+    </Wrapper>
+    );
+};
 
 //Axios config
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -60,36 +96,5 @@ const Wrapper = styled.div`
         left: 0;
       }
 `;
-
-function Main({ location }) {
-    return (
-    <Wrapper>
-    <TransitionGroup className="transition-group">
-        <CSSTransition
-          key={location.key}
-          timeout={{ enter: 100, exit: 50 }}
-          classNames={'fade'}
-        >
-        <section className="route-section">
-        <Switch className="app"  location={location}>
-            {/*User might LogIn*/}
-            <Route exact path='/' component={Home}/>
-            
-            {/*User will LogIn*/}
-            <Route path='/login' component={Login}/>
-            <Route path='/register' component={Register}/>
-            
-            {/* User is LoggedIn*/}
-            <PrivateRoute path='/dashboard' component={Dashboard}/>
-            
-            {/*Page Not Found*/}
-            <Route component={NotFound}/>
-        </Switch>
-        </section>
-        </CSSTransition>
-      </TransitionGroup>
-    </Wrapper>
-    );
-};
 
 export default hot(module)(Main);
