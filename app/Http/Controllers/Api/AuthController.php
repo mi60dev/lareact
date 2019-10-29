@@ -31,8 +31,11 @@ class AuthController extends Controller
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
         
         try {
-            $this->setCookie($token);
-            return response()->json(['message' => __('auth.signed_up')], 200);
+            return response()->json([
+                'message' => __('auth.signed_up'),
+                'user' => $user,
+                'token' => $token,
+            ], 200);
         } catch(\Exception $e)
         {
             return response()->json(['errors' => $e->getMessage(), $e->getCode()]);
@@ -41,7 +44,11 @@ class AuthController extends Controller
 
     public function login (Request $request) 
     {
-
+        $credentials = $request->only('email', 'password');
+        $validator = Validator::make($credentials, [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
         $validator = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required',
@@ -59,8 +66,11 @@ class AuthController extends Controller
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
                 
                 try {
-                    $this->setCookie($token);
-                    return response()->json(['message' => __('auth.logged_in')], 200);
+                    return response()->json([
+                        'message' => __('auth.logged_in'), 
+                        'user' => $user, 
+                        'token' => $token
+                    ], 200);
                 } catch(\Exception $e)
                 {
                     return response()->json(['errors' => $e->getMessage(), $e->getCode()]);
@@ -81,12 +91,5 @@ class AuthController extends Controller
         $token->revoke();
 
         return response()->json(['success' => [__('auth.logout')]], 200);
-    }
-
-    private function setCookie($value)
-    {
-            $name = Passport::cookie();
-            $minutes = config('session.lifetime');
-            Cookie::queue($name, $value, $minutes);
     }
 }

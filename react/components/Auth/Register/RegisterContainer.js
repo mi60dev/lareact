@@ -57,17 +57,17 @@ class RegisterContainer extends Component {
       .then(response => {
         return response;
       })
-      .then(json => {
-        if (json.data.success) {
+      .then(res => {
+        if (res.data.success) {
           let userData = {
-            id: json.data.id,
-            name: json.data.name,
-            email: json.data.email,
-            activation_token: json.data.activation_token
+            id: res.data.id,
+            name: res.data.name,
+            email: res.data.email,
           };
           let appState = {
             isRegistered: true,
-            user: userData
+            user: userData,
+            token: res.data.token
           };
           localStorage["appState"] = JSON.stringify(appState);
           this.setState({
@@ -152,7 +152,6 @@ class RegisterContainer extends Component {
         <div className="row">
           <div className="offset-xl-3 col-xl-6 offset-lg-1 col-lg-10 col-md-12 col-sm-12 col-12 ">
             <h2>Create Your Account</h2>
-            // 2.7
             {this.state.isRegistered ? (
               <FlashMessage duration={60000} persistOnHover={true}>
                 <h5 className={"alert alert-success"}>
@@ -251,4 +250,3 @@ class RegisterContainer extends Component {
 }
 
 export default withRouter(RegisterContainer);
-

@@ -37,6 +37,7 @@ class Header extends Component {
                 {this.state.isLoggedIn ?
                 <li className="has-sub">
                     <Link to="/dashboard">Dashboard</Link>
+                    <a onClick={this.logOut}>Logout</a>
                 </li> : ""} 
                 
                 {!this.state.isLoggedIn ?

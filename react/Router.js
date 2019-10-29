@@ -22,6 +22,9 @@ import './theme/_styles.sass';
 //Axios config
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.baseURL = '/api/';
+if (localStorage.appState) {
+    axios.defaults.headers.common = {'Authorization': 'Bearer ' +JSON.parse(localStorage.appState).token}
+}
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 if (token) {

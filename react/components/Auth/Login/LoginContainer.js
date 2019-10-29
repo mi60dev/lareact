@@ -41,18 +41,19 @@ class LoginContainer extends Component {
       return response;
     })
     .then(res => {
-        console.log(res.status);
         if (res.status==200) {
            let userData = {
-             id: json.data.id,
-             name: json.data.name,
-             email: json.data.email,
-             access_token: json.data.access_token,
+             id: res.data.user.id,
+             name: res.data.user.name,
+             email: res.data.user.email,
            };
            let appState = {
              isLoggedIn: true,
-             user: userData
+             user: userData,
+             token: res.data.token
            };
+
+           axios.defaults.headers.common = {'Authorization': `Bearer ${` +res.data.token+ `}`}
            localStorage["appState"] = JSON.stringify(appState);
            this.setState({
               isLoggedIn: appState.isLoggedIn,
@@ -64,7 +65,10 @@ class LoginContainer extends Component {
             alert(`Our System Failed To Register Your Account!`);
         }
     })
-    .catch(error => {if (error.response) {
+    .catch(error => {
+        
+        console.log(error);
+        if (error.response) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx
             let err = error.response.data;
             this.setState({
