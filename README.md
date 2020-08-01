@@ -33,10 +33,7 @@ Clone the repo to `my-project` (or whatever). Run the following set of commands
 cd my-project
 ```
 ```
-chown -R $USER:www-data storage
-chown -R $USER:www-data bootstrap/cache
-chmod -R 775 storage
-chmod -R 775 bootstrap/cache
+php artisan migrate
 composer install
 cp .env.example .env
 vim .env
