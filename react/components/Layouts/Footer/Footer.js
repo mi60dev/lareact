@@ -1,7 +1,7 @@
 import React from "react";
 
 const Footer = () => {
-  return <footer>Whatever normally goes into the footer</footer>;
+  return <footer class="text-muted">Footer</footer>;
 };
 
 export default Footer;

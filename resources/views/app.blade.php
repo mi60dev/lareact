@@ -11,7 +11,6 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,7 +22,7 @@
         You need to enable JavaScript to run this app.
       </noscript>
       
-      @if(env('APP_ENV') === 'local')
+      @if(config('app.env') === 'local')
         <script src="http://localhost:3000/js/app.js"></script>
       @else
         <script src="/js/app.js"></script>

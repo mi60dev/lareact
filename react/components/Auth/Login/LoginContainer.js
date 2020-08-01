@@ -116,7 +116,8 @@ render() {
     <div className="container">
       <div className="row">
         <div className="offset-xl-3 col-xl-6 offset-lg-1 col-lg-10 col-md-12 col-sm-12 col-12 ">
-          <h2 className="text-center mb30">Log In To Your Account</h2>
+          <h2 className="text-center mb30">Login To Your Account</h2>
+          <br />
           {this.state.isLogged ? <FlashMessage duration={60000} persistOnHover={true}>
           <h5 className={"alert alert-success"}>Login successful, redirecting...</h5></FlashMessage> : ''}
           {this.state.error ? <FlashMessage duration={100000} persistOnHover={true}>
@@ -125,19 +126,20 @@ render() {
           <h5 className={"alert alert-danger"}>Error: {error}</h5></FlashMessage> : ''}
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <input id="email" type="email" name="email" placeholder="E-mail" className="form-control" required onChange={this.handleEmail}/>
+                <input id="email" type="email" name="email" placeholder="E-mail" className="form-control" required onChange={this.handleEmail}/>
             </div>
             <div className="form-group">
-              <input id="password" type="password" name="password" placeholder="Password" className="form-control" required onChange={this.handlePassword}/>
+                <input id="password" type="password" name="password" placeholder="Password" className="form-control" required onChange={this.handlePassword}/>
             </div>
-           <button disabled={this.state.formSubmitting} type="submit" name="singlebutton" className="btn btn-default btn-lg  btn-block mb10"> {this.state.formSubmitting ? "Logging You In..." : "Log In"} </button>
+           <button disabled={this.state.formSubmitting} type="submit" name="singlebutton" className="btn btn-success btn-lg  btn-block mb10"> {this.state.formSubmitting ? "Logging You In..." : "Log In"} </button>
            </form>
+            <br />
+            <p className="text-white">Don't have an account? <Link to="/register"> Register</Link>
+              <span className="pull-right">
+                <Link to="/">Back to Index</Link>
+              </span>
+            </p>
         </div>
-        <p className="text-white">Don't have an account? <Link to="/register" className="text-yellow"> Register</Link>
-          <span className="pull-right">
-            <Link to="/" className="text-white">Back to Index</Link>
-          </span>
-        </p>
       </div>
     </div>
     )

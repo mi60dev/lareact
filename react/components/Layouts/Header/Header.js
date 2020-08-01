@@ -19,11 +19,9 @@ class Header extends Component {
     logOut() {
       let appState = {
         isLogged: false,
-        user: {}
       };
       localStorage["appState"] = JSON.stringify(appState);
-      this.setState(appState);
-      this.props.history.push('/login');
+      window.location.replace('login');
     }
 
     render() {
@@ -32,24 +30,24 @@ class Header extends Component {
     };
     
     return (
-        <nav className="navbar">
-            <ul>
-                
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand">
+              <Link class="navbar-brand logo" to="/dashboard"><img src="/img/logo-app.png" /></Link>
+            </span>
+            <ul class="navbar-nav">
+              <li class="nav-item">
                 {this.state.isLogged &&
-                <li className="has-sub">
-                    <NavLink to="/dashboard">Dashboard</NavLink>
-                    <Link to="/login" onClick={this.logOut}>Logout</Link>
-                </li>
+                    <a onClick={this.logOut}>Logout</a>
                 } 
-                
                 {!this.state.isLogged &&
                 <li>
                     <Link to="/login">Login</Link> |
                     <Link to="/register">Register</Link>
                 </li>
                 }
+              </li>
             </ul>
-        </nav>
+</nav>
     )
   }
 }

@@ -36,6 +36,7 @@ module.exports = {
     headers: { 'Access-Control-Allow-Origin': '*' },
     port: 3000,
     // publicPath: "http://localhost:3000/js/",
+    hot: true,
     hotOnly: true,
     disableHostCheck: true
   },

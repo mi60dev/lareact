@@ -1,7 +1,29 @@
+@import 'bootstrap'
 @import 'colors.sass'
 @import 'typography.sass'
 @import 'transitions.sass'
+@import 'inputs.sass'
+@import 'buttons.sass'
+
+@import 'head.sass'
+@import 'footer.sass'
+
 @import 'pages/auth.sass'
 
 body
   text-align: center
+  margin: 0px
+  background: $whitesmoke
+
+ul
+  list-style: none
+  padding: 0px
+
+a
+  text-decoration: none
+  transition: all 0.075s ease-in-out
+  cursor: pointer
+
+  &:hover
+    color: $blue
+    text-decoration: none

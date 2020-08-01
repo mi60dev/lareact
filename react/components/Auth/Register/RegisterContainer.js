@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import FlashMessage from "react-flash-message";
+import axios from 'axios';
 
 class RegisterContainer extends Component {
 
@@ -53,27 +54,31 @@ class RegisterContainer extends Component {
     ReactDOM.findDOMNode(this).scrollIntoView();
     let userData = this.state.user;
     axios
-      .post("/api/auth/signup", userData)
+      .post("/auth/signup", userData)
       .then(response => {
         return response;
       })
       .then(res => {
-        if (res.data.success) {
-          let userData = {
-            id: res.data.id,
-            name: res.data.name,
-            email: res.data.email,
-          };
-          let appState = {
-            isRegistered: true,
-            user: userData,
-            token: res.data.token
-          };
-          localStorage["appState"] = JSON.stringify(appState);
-          this.setState({
-            isRegistered: appState.isRegistered,
-            user: appState.user
-          });
+        if (res.status==200) {
+           let userData = {
+             id: res.data.user.id,
+             name: res.data.user.name,
+             email: res.data.user.email,
+           };
+           let appState = {
+             isLogged: true,
+             user: userData,
+             token: res.data.token
+           };
+
+           axios.defaults.headers.common = {'Authorization': `Bearer ${` +res.data.token+ `}`}
+           localStorage["appState"] = JSON.stringify(appState);
+           this.setState({
+              isLogged: appState.isLogged,
+              user: appState.user,
+              error: ''
+           });
+           location.reload()
         } else {
           alert(`Our System Failed To Register Your Account!`);
         }
@@ -111,7 +116,7 @@ class RegisterContainer extends Component {
     this.setState(prevState => ({
       user: {
         ...prevState.user,
-        first_name: value
+        name: value
       }
     }));
   }
@@ -224,20 +229,21 @@ class RegisterContainer extends Component {
               <button
                 type="submit"
                 name="singlebutton"
-                className="btn btn-default btn-lg  btn-block mb10"
+                className="btn btn-success btn-lg btn-block mb10"
                 disabled={this.state.formSubmitting ? "disabled" : ""}
               >
                 Create Account
               </button>
             </form>
+            <br />
             <p className="text-white">
               Already have an account?
-              <Link to="/login" className="text-yellow">
+              <Link to="/login">
                 {" "}
                 Log In
               </Link>
               <span className="pull-right">
-                <Link to="/" className="text-white">
+                <Link to="/">
                   Back to Home
                 </Link>
               </span>
