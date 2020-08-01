@@ -30,7 +30,7 @@ render() {
     return (
       <div>
         <Header userData={this.state.user} userIsLoggedIn={this.state.isLogged}/>
-            <span>Whatever normally goes into the user dasboard page; the table below for instance</span> <br/>
+            <span>Dashboard</span> <br/>
             <pre></pre>
         <Footer/>
       </div>
