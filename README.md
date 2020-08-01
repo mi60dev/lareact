@@ -33,17 +33,17 @@ Clone the repo to `my-project` (or whatever). Run the following set of commands
 cd lareact
 ```
 ```
-php artisan migrate
 composer install
 cp .env.example .env
 vim .env
 ```
 Add your database configs. Then run
 ```
+php artisan migrate
 php artisan key:generate
 php artisan passport:install
-npm install
-npm start
+yarn install
+yarn start
 ```
 
 
