@@ -11,4 +11,6 @@
 |
 */
 
-Route::view('/{path?}', 'app')->name('app');
+Route::get('/{path?}', function () {
+    return view('app');
+})->where('path', '.*');
