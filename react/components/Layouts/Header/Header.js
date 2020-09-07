@@ -30,12 +30,12 @@ class Header extends Component {
     };
     
     return (
-        <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand">
-              <Link class="navbar-brand logo" to="/dashboard"><img src="/img/logo-app.png" /></Link>
+        <nav className="navbar navbar-light bg-light">
+            <span className="navbar-brand">
+              <Link className="navbar-brand logo" to="/dashboard"><img src="/img/logo-app.png" /></Link>
             </span>
-            <ul class="navbar-nav">
-              <li class="nav-item">
+            <ul className="navbar-nav">
+              <li className="nav-item">
                 {this.state.isLogged &&
                     <a onClick={this.logOut}>Logout</a>
                 } 
@@ -47,7 +47,7 @@ class Header extends Component {
                 }
               </li>
             </ul>
-</nav>
+        </nav>
     )
   }
 }

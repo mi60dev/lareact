@@ -4,6 +4,7 @@
 @import 'transitions.sass'
 @import 'inputs.sass'
 @import 'buttons.sass'
+@import '~react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 @import 'head.sass'
 @import 'footer.sass'
@@ -27,3 +28,19 @@ a
   &:hover
     color: $blue
     text-decoration: none
+
+.loader
+    position: fixed
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    background: rgba(27, 41, 47, 0.43) 
+    z-index: 999999
+
+    svg
+      position: absolute
+      top: 43vh
+      left: 0
+      right: 0
+      margin: auto
