@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import FlashMessage from "react-flash-message";
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 class RegisterContainer extends Component {
@@ -78,35 +79,19 @@ class RegisterContainer extends Component {
               user: appState.user,
               error: ''
            });
-           location.reload()
+           toast.success('Wellcome! Logging you in in 3 seconds...', { autoClose: 3000 });
+           setTimeout(() => {
+              location.reload()
+           }, 3000);
         } else {
-          alert(`Our System Failed To Register Your Account!`);
+            toast.warning('Could not sign you in... Please try again.');
         }
       })
       .catch(error => {
-        if (error.response) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          let err = error.response.data;
-          this.setState({
-            error: err.message,
-            errorMessage: err.errors,
-            formSubmitting: false
-          });
-        } else if (error.request) {
-          // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
-          let err = error.request;
-          this.setState({
-            error: err,
-            formSubmitting: false
-          });
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          let err = error.message;
-          this.setState({
-            error: err,
-            formSubmitting: false
-          });
-        }
+        error.response.data.errors.map((e) => {
+            toast.warning(e);
+        });
+        this.setState({formSubmitting: false});
       })
       .finally(this.setState({ error: "" }));
   }
@@ -162,22 +147,6 @@ class RegisterContainer extends Component {
                 <h5 className={"alert alert-success"}>
                   Registration successful, redirecting...
                 </h5>
-              </FlashMessage>
-            ) : (
-              ""
-            )}
-            {this.state.error ? (
-              <FlashMessage duration={900000} persistOnHover={true}>
-                <h5 className={"alert alert-danger"}>
-                  Error: {this.state.error}
-                </h5>
-                <ul>
-                  {arr.map((item, i) => (
-                    <li key={i}>
-                      <h5 style={{ color: "red" }}>{item}</h5>
-                    </li>
-                  ))}
-                </ul>
               </FlashMessage>
             ) : (
               ""

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-import FlashMessage from 'react-flash-message';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 class LoginContainer extends Component {
@@ -60,36 +60,17 @@ class LoginContainer extends Component {
               user: appState.user,
               error: ''
            });
-           location.reload()
+           toast.success('Success! Logging you in...', { autoClose: 1600 });
+            setTimeout(() => {
+               location.reload()
+            }, 1600);
         } else {
-            alert(`Our System Failed To Register Your Account!`);
+            toast.warning('Could not log you in. Please try again.');
         }
     })
     .catch(error => {
-        if (error.response) {
-            // The request was made and the server responded with a status code that falls out of the range of 2xx
-            let err = error.response.data;
-            this.setState({
-              error: err.message,
-              errorMessage: err.errors,
-              formSubmitting: false
-            })
-          }
-          else if (error.request) {
-            // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
-            let err = error.request;
-            this.setState({
-              error: err,
-              formSubmitting: false
-            })
-         } else {
-           // Something happened in setting up the request that triggered an Error
-           let err = error.message;
-           this.setState({
-             error: err,
-             formSubmitting: false
-           })
-       }
+        this.setState({formSubmitting: false});
+        toast.warning('Could not log you in. Please try again.');
      })
     .finally(this.setState({error: ''}));
 }
@@ -118,12 +99,6 @@ render() {
         <div className="offset-xl-3 col-xl-6 offset-lg-1 col-lg-10 col-md-12 col-sm-12 col-12 ">
           <h2 className="text-center mb30">Login To Your Account</h2>
           <br />
-          {this.state.isLogged ? <FlashMessage duration={60000} persistOnHover={true}>
-          <h5 className={"alert alert-success"}>Login successful, redirecting...</h5></FlashMessage> : ''}
-          {this.state.error ? <FlashMessage duration={100000} persistOnHover={true}>
-          <h5 className={"alert alert-danger"}>Error: {this.state.error}</h5></FlashMessage> : ''}
-          {error && !this.state.isLogged ? <FlashMessage duration={100000} persistOnHover={true}>
-          <h5 className={"alert alert-danger"}>Error: {error}</h5></FlashMessage> : ''}
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
                 <input id="email" type="email" name="email" placeholder="E-mail" className="form-control" required onChange={this.handleEmail}/>

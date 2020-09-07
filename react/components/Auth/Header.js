@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link, NavLink, withRouter} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 class AuthHeader extends Component {
   
@@ -32,7 +33,10 @@ class AuthHeader extends Component {
     };
     
     return (
-        <img className="logo" src="/img/logo-white.png" />
+        <div>
+            <ToastContainer />
+            <img className="logo" src="/img/logo-white.png" />
+        </div>
     )
   }
 }

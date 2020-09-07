@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link, NavLink, withRouter} from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 class Header extends Component {
   
@@ -21,7 +22,13 @@ class Header extends Component {
         isLogged: false,
       };
       localStorage["appState"] = JSON.stringify(appState);
-      window.location.replace('login');
+
+      toast.info('Adios!', {
+        autoClose: 1600
+      });
+      setTimeout(() => {
+        window.location.reload('login');
+      }, 1000);
     }
 
     render() {
